@@ -55,6 +55,7 @@ const Results = () => {
                 <p>Loading...</p>
 
             ) : (
+                <div className="overflow-x-auto">
 
                 <table className="w-full border shadow rounded">
 
@@ -122,7 +123,7 @@ const Results = () => {
                                     ).toLocaleString()}
                                 </td>
 
-                                <td className="p-4 flex gap-3 justify-center">
+                                <td className="p-4 flex flex-col sm:flex-row gap-2 justify-center">
 
                                     <td>
                                         <button
@@ -144,6 +145,7 @@ const Results = () => {
                     </tbody>
 
                 </table>
+                </div>
 
             )}
 

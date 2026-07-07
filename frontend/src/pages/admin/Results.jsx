@@ -49,6 +49,7 @@ const Results = () => {
                 <p>Loading...</p>
 
             ) : (
+                <div className="overflow-x-auto">
 
                 <table className="w-full bg-white shadow rounded-xl">
 
@@ -113,7 +114,7 @@ const Results = () => {
                                     {new Date(attempt.createdAt).toLocaleString()}
                                 </td>
 
-                                <td className="p-4 flex justify-center gap-3">
+                                <td className="p-4 flex justify-center flex-col sm:flex-row gap-2">
 
                                     
 
@@ -137,6 +138,7 @@ const Results = () => {
                     </tbody>
 
                 </table>
+                </div>
 
             )}
 

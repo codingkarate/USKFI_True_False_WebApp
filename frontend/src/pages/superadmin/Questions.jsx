@@ -72,6 +72,7 @@ const Questions = () => {
             {loading ? (
                 <p>Loading...</p>
             ) : (
+            <div className="overflow-x-auto">    
             <table className="w-full bg-white shadow rounded-xl">
                 <thead>
                     <tr className="bg-gray-100">
@@ -88,7 +89,7 @@ const Questions = () => {
                         key={question._id}
                         className="border-b"
                         >
-                            <td className="p-4">
+                            <td className="p-4 wrap-break-word max-w-sm">
                                 {question.question}
                             </td>
 
@@ -125,6 +126,7 @@ const Questions = () => {
                 </tbody>
 
             </table>
+            </div>
         )}
         {showModal && (
             <CreateQuestionModal

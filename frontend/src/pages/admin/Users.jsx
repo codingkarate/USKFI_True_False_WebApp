@@ -37,7 +37,7 @@ const Users = () => {
 
         <DashboardLayout>
 
-            <div className="flex justify-between items-center mb-6">
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
 
                 <h1 className="text-4xl font-bold">
                     Candidates
@@ -51,6 +51,7 @@ const Users = () => {
                     <p>Loading...</p>
 
                     :
+                    <div className="overflow-x-auto">
 
                     <table className="w-full bg-white shadow rounded-xl">
 
@@ -114,6 +115,7 @@ const Users = () => {
                         </tbody>
 
                     </table>
+                    </div>
 
             }
 

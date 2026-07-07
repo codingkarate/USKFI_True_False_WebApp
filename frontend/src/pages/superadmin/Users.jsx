@@ -65,7 +65,7 @@ const Users = () => {
                 )
             }
 
-            <div className="flex justify-between items-center mb-6">
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
 
                 <h1 className="text-4xl font-bold">
                     Users
@@ -73,7 +73,7 @@ const Users = () => {
 
                 <button
                     onClick={()=> setShowModal(true)}
-                    className="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700"
+                    className="w-full sm:w-auto bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700"
                 >
                     + Create User
                 </button>
@@ -88,7 +88,7 @@ const Users = () => {
 
                     :
 
-                    <table className="w-full bg-white shadow rounded-xl">
+                    <table className="min-w-full bg-white shadow rounded-xl">
 
                         <thead>
 

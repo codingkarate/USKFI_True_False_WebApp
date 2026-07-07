@@ -39,11 +39,11 @@ function Login() {
 
   return (
 
-    <div className="min-h-screen bg-slate-900 flex items-center justify-center">
+    <div className="min-h-screen bg-linear-to-br from-slate-900 via-blue-900 to-slate-800 flex items-center justify-center p-4">
 
-      <div className="bg-white rounded-xl shadow-xl w-96 p-8">
+      <div className="bg-white rounded-xl shadow-xl w-[90%] max-w-md p-6 sm:p-8">
 
-        <h1 className="text-3xl font-bold text-center mb-8">
+        <h1 className="text-2xl sm:text-3xl font-bold text-center mb-6 leading-tight">
           USKFI REFEREE JUDGE CLASS TEST WEB-APP
         </h1>
 
@@ -52,7 +52,7 @@ function Login() {
         placeholder="Username"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
-        className="w-full border p-3 rounded-lg mb-4"
+        className="w-full border p-3 rounded-lg mb-4 text-base"
         />
 
         <input
@@ -66,7 +66,7 @@ function Login() {
         <button
         onClick={handleLogin}
         disabled={loading}
-        className="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700"
+        className="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition duration-200"
         >
             {loading ? "Logging in..." : "Login"}
         </button>

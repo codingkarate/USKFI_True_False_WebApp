@@ -60,7 +60,7 @@ const Review = () => {
 
         <DashboardLayout>
 
-        <div className="min-h-screen bg-gray-100 p-10">
+        <div className="min-h-screen bg-gray-100 p-4 sm:p-10">
 
             <h1 className="text-4xl font-bold mb-4">
                 Review Solutions

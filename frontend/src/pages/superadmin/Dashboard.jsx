@@ -56,7 +56,7 @@ const Dashboard = () => {
         Superadmin Dashboard
       </h1>
 
-      <div className="grid grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
 
         <div className="bg-white shadow rounded-xl p-6">
           <h2 className="text-xl font-bold">Users</h2>

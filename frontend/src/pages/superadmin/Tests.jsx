@@ -55,15 +55,15 @@ const Tests = () => {
 
   return (
     <DashboardLayout>
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
 
-        <h1 className="text-4xl font-bold">
+        <h1 className="text-2xl sm:text-4xl font-bold">
           Tests
         </h1>
 
         <button
           onClick={() => setShowModal(true)}
-          className="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700"
+          className="w-full sm:w-auto bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700"
         >
           + Create Test
         </button>
@@ -73,35 +73,33 @@ const Tests = () => {
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <table className="w-full bg-white shadow rounded-xl">
+        <div className="overflow-x-auto">
+          <table className="w-full bg-white shadow rounded-xl">
+            <thead>
+              <tr className="bg-gray-100">
+                <th className="p-4 text-left">
+                  Test Name
+                </th>
 
-          <thead>
+                <th className="p-4 text-left">
+                  Duration
+                </th>
 
-            <tr className="bg-gray-100">
+                <th className="p-4 text-left">
+                  Questions
+                </th>
 
-              <th className="p-4 text-left">
-                Test Name
-              </th>
+                <th className="p-4 text-left">
+                  Status
+                </th>
 
-              <th className="p-4 text-left">
-                Duration
-              </th>
+                <th className="p-4 text-left">
+                  Actions
+                </th>
 
-              <th className="p-4 text-left">
-                Questions
-              </th>
+              </tr>
 
-              <th className="p-4 text-left">
-                Status
-              </th>
-
-              <th className="p-4 text-left">
-                Actions
-              </th>
-
-            </tr>
-
-          </thead>
+            </thead>
 
           <tbody>
 
@@ -112,23 +110,23 @@ const Tests = () => {
                 className="border-b"
               >
 
-                <td className="p-4">
+                <td className="p-3 sm:p-4">
                   {test.testName}
                 </td>
 
-                <td className="p-4">
+                <td className="p-3 sm:p-4">
                   {test.duration} mins
                 </td>
 
-                <td className="p-4">
+                <td className="p-3 sm:p-4">
                   {test.totalQuestions}
                 </td>
 
-                <td className="p-4">
+                <td className="p-3 sm:p-4">
                   {test.status}
                 </td>
 
-                <td className="p-4">
+                <td className="p-3 sm:p-4">
 
                   <button
                      onClick={() => {
@@ -136,7 +134,7 @@ const Tests = () => {
                         openEditModal(test);
                     }}
                     // onClick={() => openEditModal(test)} 
-                    className="text-blue-600 mr-3">
+                    className="text-blue-600 mr-2 sm:mr-3">
                     Edit
                   </button>
 
@@ -155,6 +153,7 @@ const Tests = () => {
           </tbody>
 
         </table>
+        </div>
       )}
       {showModal && (
         <CreateTestModal
@@ -174,6 +173,7 @@ const Tests = () => {
         />
         )
        }
+       
     </DashboardLayout>
   );
 };
