@@ -131,6 +131,20 @@ const submitTest = async (req, res) => {
 
     });
 
+
+    const existingAttempt = await Attempt.findOne({
+      candidate: req.user.id,
+      test: testId,
+    });
+
+if (existingAttempt) {
+    return res.status(400).json({
+        success: false,
+        message:
+            "You have already submitted this test."
+    });
+}
+
     res.status(201).json({
       success: true,
       message: "Test submitted successfully",

@@ -14,6 +14,8 @@ const Exam = () => {
     const [loading, setLoading] = useState(true);
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [timeLeft, setTimeLeft] = useState(7 * 60); // 7 minutes
+    const [submitting, setSubmitting] = useState(false);
+    
 
     const fetchQuestions = async () => {
         try {
@@ -46,7 +48,7 @@ const Exam = () => {
     useEffect(() => {
         if (loading) return;
         if (timeLeft <= 0) {
-            alert("Time Up!");
+            handleSubmitExam();
             return;
         }
         const timer = setInterval(() => {
@@ -58,37 +60,84 @@ const Exam = () => {
     const minutes = Math.floor(timeLeft / 60);
     const seconds = timeLeft % 60;
 
+
     const handleSubmitExam = async () => {
+        if (submitting) return;
+
         try {
-            const formattedAnswers = Object.entries(answers).map(
+
+            setSubmitting(true);
+
+            const formattedAnswers =
+                Object.entries(answers).map(
                 ([questionId, selectedAnswer]) => ({
                     questionId,
                     selectedAnswer,
                 })
             );
-            console.log("Formatted Answers:", formattedAnswers);
-            const res = await api.post("/attempts/submit", {
-                testId,
-                answers: formattedAnswers,
-                timeTaken: timeLeft,
-            });
-            // console.log(res.data);
-            console.log("Full Response:", res.data);
-            console.log("Result:", res.data.result);
-            console.log("Attempt:", res.data.attempt);
+
+            const res = await api.post(
+                "/attempts/submit",
+                {
+                    testId,
+                    answers: formattedAnswers,
+                    timeTaken: timeLeft,
+                }
+            );
+
             navigate("/candidate/result", {
                 state: {
                     result: res.data.result,
                 },
             });
-        } catch (err) {
-            console.log(err);
-            alert(
-                err.response?.data?.message ||
-                "Failed to submit exam."
-            );
-        }
-    };
+
+    } catch (err) {
+
+        console.log(err);
+
+        alert(
+            err.response?.data?.message ||
+            "Failed to submit exam."
+        );
+
+    } finally {
+
+        setSubmitting(false);
+
+    }
+};
+
+    // const handleSubmitExam = async () => {
+    //     try {
+    //         const formattedAnswers = Object.entries(answers).map(
+    //             ([questionId, selectedAnswer]) => ({
+    //                 questionId,
+    //                 selectedAnswer,
+    //             })
+    //         );
+    //         console.log("Formatted Answers:", formattedAnswers);
+    //         const res = await api.post("/attempts/submit", {
+    //             testId,
+    //             answers: formattedAnswers,
+    //             timeTaken: timeLeft,
+    //         });
+    //         // console.log(res.data);
+    //         console.log("Full Response:", res.data);
+    //         console.log("Result:", res.data.result);
+    //         console.log("Attempt:", res.data.attempt);
+    //         navigate("/candidate/result", {
+    //             state: {
+    //                 result: res.data.result,
+    //             },
+    //         });
+    //     } catch (err) {
+    //         console.log(err);
+    //         alert(
+    //             err.response?.data?.message ||
+    //             "Failed to submit exam."
+    //         );
+    //     }
+    // };
 
     return (
         <DashboardLayout>
@@ -180,10 +229,25 @@ const Exam = () => {
                 {currentQuestion === questions.length - 1 ? (
                     <button
                     onClick={handleSubmitExam}
-                    className="bg-green-600 text-white px-6 py-2 rounded"
+                    disabled={submitting}
+                    className="
+                     bg-green-600
+                     text-white
+                     px-6 py-2 rounded
+                     disabled:opacity-50
+                     disabled:cursor-not-allowed
+                     "
                     >
-                        Submit Exam
+                       {submitting
+                       ? "Submitting..."
+                       : "Submit Exam"}
                     </button>
+                    // <button
+                    // onClick={handleSubmitExam}
+                    // className="bg-green-600 text-white px-6 py-2 rounded"
+                    // >
+                    //     Submit Exam
+                    // </button>
                     ) : (
                     <button
                     onClick={() => setCurrentQuestion(currentQuestion + 1)}
