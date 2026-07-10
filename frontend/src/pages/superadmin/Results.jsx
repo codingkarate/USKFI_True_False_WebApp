@@ -44,9 +44,9 @@ const Results = () => {
 
         <DashboardLayout>
 
-        <div className="p-10">
+        <div className="p-4 sm:p-10">
 
-            <h1 className="text-4xl font-bold mb-8">
+            <h1 className="text-2xl sm:text-4xl font-bold mb-8">
                 Candidate Results
             </h1>
 
@@ -57,7 +57,7 @@ const Results = () => {
             ) : (
                 <div className="overflow-x-auto">
 
-                <table className="w-full border shadow rounded">
+                <table className="min-w-full border shadow rounded">
 
                     <thead className="bg-gray-100">
 
@@ -125,7 +125,7 @@ const Results = () => {
 
                                 <td className="p-4 flex flex-col sm:flex-row gap-2 justify-center">
 
-                                    <td>
+                                
                                         <button
                                         onClick={() =>
                                             navigate(`/admin/review/${attempt._id}`)
@@ -136,7 +136,7 @@ const Results = () => {
                                         </button>
                                     </td>
 
-                                </td>
+                                
 
                             </tr>
 
