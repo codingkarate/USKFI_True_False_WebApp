@@ -101,11 +101,11 @@ const Results = () => {
                             >
 
                                 <td className="p-4">
-                                    {attempt.candidate.fullName}
+                                    {attempt.candidate?.fullName || "Unknown Candidate"}
                                 </td>
 
                                 <td className="p-4">
-                                    {attempt.test.testName}
+                                    {attempt.test?.testName || "Unknown Test"}
                                 </td>
 
                                 <td className="p-4">
@@ -118,9 +118,9 @@ const Results = () => {
                                 </td>
 
                                 <td className="p-4">
-                                    {new Date(
-                                        attempt.createdAt
-                                    ).toLocaleString()}
+                                    {attempt.createdAt
+                                    ? new Date(attempt.createdAt).toLocaleString()
+                                    : "-"}
                                 </td>
 
                                 <td className="p-4 flex flex-col sm:flex-row gap-2 justify-center">
