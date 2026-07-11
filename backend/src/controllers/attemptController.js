@@ -154,10 +154,10 @@ const submitTest = async (req, res) => {
     });
 
 
-    const existingAttempt = await Attempt.findOne({
-      candidate: req.user.id,
-      test: testId,
-    });
+    // const existingAttempt = await Attempt.findOne({
+    //   candidate: req.user.id,
+    //   test: testId,
+    // });
 
 if (existingAttempt) {
     return res.status(400).json({

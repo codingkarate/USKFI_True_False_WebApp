@@ -100,7 +100,7 @@ const Exam = () => {
             "Failed to submit exam."
         );
 
-    } finally {
+    
 
         setSubmitting(false);
 
