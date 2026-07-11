@@ -62,10 +62,19 @@ const submitTest = async (req, res) => {
       });
     }
 
-    let totalMarks = 0;
+    // let totalMarks = 0;
     let obtainedMarks = 0;
 
     const evaluatedAnswers = [];
+
+    const questions =
+    await Question.find({
+        test: testId,
+    });
+    const totalMarks = questions.reduce(
+      (sum, q) =>
+        sum + q.marks,0
+    );
 
     for (const answer of answers) {
 
@@ -77,7 +86,7 @@ const submitTest = async (req, res) => {
 
       if (!question) continue;
 
-      totalMarks += question.marks;
+      // totalMarks += question.marks;
 
       const isCorrect =
         answer.selectedAnswer === question.correctAnswer;
@@ -109,6 +118,19 @@ const submitTest = async (req, res) => {
         console.log("Percentage:", percentage);
 
     console.log("Submitting as user:", req.user);
+
+    const existingAttempt =
+    await Attempt.findOne({
+      candidate: req.user.id,
+      test: testId,
+    });
+    if (existingAttempt) {
+      return res.status(400).json({
+        success: false,
+        message:
+            "You have already attempted this test.",
+          });
+        }
 
     const attempt = await Attempt.create({
         
