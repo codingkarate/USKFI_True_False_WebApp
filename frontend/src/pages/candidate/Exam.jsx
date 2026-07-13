@@ -20,7 +20,7 @@ const Exam = () => {
     const fetchQuestions = async () => {
         try {
             const previous =
-            await api.get("/attempts/my");
+            await api.get("/attempts/my-attempts");
             const alreadyAttempted =
             previous.data.attempts.find(
                 (a) => a.test._id === testId
