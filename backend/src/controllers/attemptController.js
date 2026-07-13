@@ -48,6 +48,19 @@ const submitTest = async (req, res) => {
   try {
 
     const { testId, answers, timeTaken } = req.body;
+    const existingAttempt =
+    await Attempt.findOne({
+      candidate: req.user.id,
+      test: testId,
+    });
+    if (existingAttempt) {
+      return res.status(400).json({
+        success: false,
+        message:
+            "You have already attempted this test.",
+          });
+        }
+
 
     console.log("========== REQUEST BODY ==========");
     console.log(req.body);
@@ -119,18 +132,7 @@ const submitTest = async (req, res) => {
 
     console.log("Submitting as user:", req.user);
 
-    const existingAttempt =
-    await Attempt.findOne({
-      candidate: req.user.id,
-      test: testId,
-    });
-    if (existingAttempt) {
-      return res.status(400).json({
-        success: false,
-        message:
-            "You have already attempted this test.",
-          });
-        }
+    
 
     const attempt = await Attempt.create({
         
@@ -159,13 +161,7 @@ const submitTest = async (req, res) => {
     //   test: testId,
     // });
 
-if (existingAttempt) {
-    return res.status(400).json({
-        success: false,
-        message:
-            "You have already submitted this test."
-    });
-}
+
 
     res.status(201).json({
       success: true,

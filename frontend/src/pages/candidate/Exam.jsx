@@ -19,6 +19,22 @@ const Exam = () => {
 
     const fetchQuestions = async () => {
         try {
+            const previous =
+            await api.get("/attempts/my");
+            const alreadyAttempted =
+            previous.data.attempts.find(
+                (a) => a.test._id === testId
+            );
+
+if (alreadyAttempted) {
+    alert(
+      "You have already attempted this test."
+    );
+
+    navigate("/candidate/dashboard");
+
+    return;
+}
 
             const res = await api.get(
                 `/questions/test/${testId}`
